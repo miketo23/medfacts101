@@ -39,105 +39,125 @@
     <p>&copy; 2025 MedFacts 101</p>
   </footer>
 <style>
-    body {
-      font-family: 'Helvetica Neue', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fefefe;
-      color: #333;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-
-    header {
-      background-color: lightblue;
-      padding: 1rem 2rem;
-      text-align: center;
-      color: black;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-
-    header h1 {
-      margin: 0.5rem 0;
-      
-    }
-
-    header img {
-      max-width: 100px;
-      height: auto;
-      margin-top: 0.5rem;
-    }
-
-    nav {
-      margin-top: 0.5rem;
-    }
-
-    nav a {
-      margin: 0 1rem;
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: bold;
-      
-    }
-
-    main {
-      padding: 2rem;
-      flex-grow: 1; /* Allows the main content to expand and push the footer down */
-    }
-
-    .content {
-      margin-bottom: 2rem;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-
-    .content h2 {
-      color: #004080;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-
-    .cta {
-      text-align: center;
-      padding: 2rem;
-      background-color: #f0f8ff;
-      border-top: 1px solid #ddd;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-
-    .cta .btn {
-      background-color: #00509e;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-
-    .cta .btn:hover {
-      background-color: #003f7f;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #e6f0fa;
-      font-size: 0.9rem;
-    }
-
-    .sidebar {
-      background-color: lightblue;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      gap: 200px; 
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fefefe;
+  color: #333;
 }
 
-    .sidebar a {
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-    }
-      
-    }
+header {
+  background-color: lightblue;
+  padding: 1rem 2rem;
+  text-align: center;
+  color: black;
+}
+
+header h1 {
+  margin: 0.5rem 0;
+}
+
+header img {
+  max-width: 100px;
+  height: auto;
+  margin-top: 0.5rem;
+}
+
+nav {
+  margin-top: 0.5rem;
+}
+
+nav a {
+  margin: 0 1rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main {
+  padding: 2rem;
+}
+
+.content {
+  margin-bottom: 2rem;
+}
+
+.content h2 {
+  color: #004080;
+}
+
+.cta {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f0f8ff;
+  border-top: 1px solid #ddd;
+}
+
+.cta .btn {
+  background-color: #00509e;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.cta .btn:hover {
+  background-color: #003f7f;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #e6f0fa;
+  font-size: 0.9rem;
+}
+
+.sidebar {
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 200px;
+}
+
+.sidebar a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* --- Media Query for Mobile Devices --- */
+@media screen and (max-width: 600px) {
+  /* This rule applies to devices with a screen width of 600px or less */
+  
+  .sidebar {
+    /* Stack the links vertically instead of horizontally */
+    flex-direction: column;
+    
+    /* Center the stacked links */
+    align-items: center;
+    
+    /* Remove the large gap and use a small margin for spacing */
+    gap: 0;
+  }
+  
+  .sidebar a {
+    /* Add vertical space between the stacked links */
+    margin: 0.5rem 0;
+  }
+  
+  main {
+    /* Reduce padding on the sides for smaller screens */
+    padding: 1rem;
+  }
+  
+  header img {
+    /* Ensure the image doesn't get too large on small screens */
+    max-width: 80px;
+  }
+}
   </style>
 </body>
 </html>
