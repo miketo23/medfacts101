@@ -31,49 +31,17 @@ form_count = 0
 def index():
     return render_template('index.html')
 
-@app.route('/donate', methods=['POST'])
-def donate():
-    global form_count
-    data = request.json
-    name = data['name']
-    email = data['email']
-    amount = data['amount']
-
-    # Insert into SQLite database
-    with sqlite3.connect('users.db') as conn:
-        cursor = conn.cursor()
-        cursor.execute(
-            'INSERT INTO users (name, email, amount) VALUES (?, ?, ?)',
-            (name, email, amount)
-        )
-        conn.commit()
-
-    form_count += 1
-
-    # Process data and respond with JSON
-    response = {
-        'message': 'Form submitted successfully!',
-        'form_count': form_count,
-        'success': True
-    }
-
-    return jsonify(response)
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
 
-@app.route('/info')
+@app.route('/weeklyblogs')
 def info():
-    return render_template('info.html')
+    return render_template('weeklyblogs.html')
 
-@app.route('/chatbot')
+@app.route('/aboutus')
 def chatbot():
-    return render_template('chatbot.html')
-
+    return render_template('aboutus.html')
 
 @app.route('/users', methods=['GET'])
 def get_users():
