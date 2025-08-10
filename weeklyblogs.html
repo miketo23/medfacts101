@@ -202,6 +202,49 @@
       font-weight: bold;
       font-family: 'Helvetica Neue', sans-serif;
     }
+@media screen and (max-width: 600px) {
+  /* This rule applies to devices with a screen width of 600px or less */
+  
+  .sidebar {
+    /* Stack the links vertically instead of horizontally */
+    flex-direction: column;
+    
+    /* Center the stacked links */
+    align-items: center;
+    
+    /* Remove the large gap and use a small margin for spacing */
+    gap: 0;
+  }
+  
+  .sidebar a {
+    /* Add vertical space between the stacked links */
+    margin: 0.5rem 0;
+  }
+  nav{
+    /* Stack the links vertically instead of horizontally */
+    flex-direction: column;
+    
+    /* Center the stacked links */
+    align-items: center;
+    
+    /* Remove the large gap and use a small margin for spacing */
+    gap: 0;
+  }
+  
+  nav a{
+    /* Add vertical space between the stacked links */
+    margin: 0.5rem 0;
+  }
+  main {
+    /* Reduce padding on the sides for smaller screens */
+    padding: 1rem;
+  }
+  
+  header img {
+    /* Ensure the image doesn't get too large on small screens */
+    max-width: 80px;
+  }
+}
   </style>
 </body>
 </html>
