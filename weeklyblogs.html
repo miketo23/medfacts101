@@ -260,8 +260,9 @@
     /* Ensure the image doesn't get too large on small screens */
     max-width: 80px;
   }
-  .otherposts {
+  .otherposts { /* Corrected selector */
     /* Stack the links vertically instead of horizontally */
+    display: flex; /* You must declare the container as a flexbox */
     flex-direction: column;
     
     /* Center the stacked links */
@@ -270,6 +271,7 @@
     /* Remove the large gap and use a small margin for spacing */
     gap: 0;
   }
+  
   .otherposts a {
     /* Add vertical space between the stacked links */
     margin: 0.5rem 0;
