@@ -3,232 +3,245 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MedFacts 101 Home Page</title>
+  <title>MedFacts 101</title>
   <link rel="icon" type="jpg" href="favicon.jpg">
-</head>
-<body>
-  <header>
-    <div class="sidebar">
-      <a href="https://medfacts101.netlify.app">Home</a>
-      <a href="https://medfacts101.netlify.app/aboutus">About Us</a>
-      <a href="https://medfacts101.netlify.app/weeklyblogs">Weekly Blogs</a>
-      <a href="https://medfacts101.netlify.app/contact">Contact Us</a>
-    </div> 
-    <h1>MedFacts 101</h1>
-    <img src="https://ik.imagekit.io/openarmsproj/download.png?updatedAt=1754331082926" alt="MedFacts Logo" />
-    <nav>
-      <a href="#prosandcons">Pros, Cons and Dangers</a><br><br>
-      <a href="#cause">What Causes Medication Overdosing?</a><br><br>
-      <a href="#plan">What's the plan with MedFacts 101?</a><br><br>
-      <a href="#help">How You All Can Help</a>
-    </nav>
-  </header>
 
-  <main>
-    <section id="prosandcons" class="content">
-      <h2>Antibiotics: Pros, Cons and Dangers
-</h2>
-      <p>
-        Pros:<br>
-        <ul>
-          <li>Overall decrease of U.S. drug overdose deaths between 2023 and 2024 (110,000 to about 80,400)</li>
-          <li>Antibiotics have saved countless of lives since their discovery in 1928 (first was penicillin).</li></ul>
-        Cons:<br>
-       <ul>
-          <li>At least 30% of prescribed antibiotics are deemed unnecessary in the United States.</li>
-          <li>The rate of antibiotic-resistant bacteria is increasing rapidly (estimated 10M deaths annually by 2050).</li></ul>
-      </p>
-    </section>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9fbfd;
+      color: #333;
+      line-height: 1.6;
+    }
 
-    <section id="cause" class="content">
-      <h2>What causes Medication Overdosing?
-</h2>
-      <p>
-       While there are many factors contributing to this global issue, some of the main factors include:<br>
-        <ul>
-          <li>Medication Overuse</li>
-          <ul>
-            <li>Taking medication more than required</li></ul>
-          <li>Medication Misuse</li>
-          <ul>
-            <li>Taking medication in a way not intended by the doctor</li></ul>
-          <li>Lack of Patient Education</li>
-          <ul>
-            <li>Contributes to the two points above</li>
-            <li>Misconceptions and lack of complete knowledge of antibiotic effects</li>
-            <li>Patient expectations</li>
-            <ul>
-              <li>Can lead to inappropriate drug prescription</li>
-              </p>
-    </section>
+    header {
+      background-color: #cfe8f7;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
 
-    <section id="plan" class="content">
-      <h2>What’s the plan with MedFacts 101?</h2>
-      <p>
-        <ul>
-          <li> Every week, I’m posting one slideshow on Instagram discussing a topic relating to using medication</li>
-          <li>I’m aiming to help contribute to the lack of patient education, which ASPs (Antibiotic Stewardship Programs) have already started to begin doing.</li>
-          </ul>
-      </p>
-    </section>
-    
-    <section id="help" class="content">
-      <h2>How You All Can Help</h2>
-      <p>
-        <ul>
-          <li>Continue to educate the public about the danger of antibiotic overuse.</li>
-          <li>Promote this website and share this with anyone that you know.</li>
-          <li>Comment with any ideas for future topics! Your suggestions could help someone in the future.</li>
-          </ul>
-      </p>
-    </section>
+    header h1 {
+      margin: 0.5rem 0;
+      font-size: 2rem;
+    }
 
-    <section class="cta">
-      <p>Want to receive more information about MedFacts 101?</p>
-      <a href="https://forms.gle/3iy38B3MzcbFRVrRA" class="btn">Click here!</a>
-    </section>
-  </main>
+    header img {
+      max-width: 100px;
+      margin: 0.5rem 0;
+    }
 
-  <footer>
-    <p>&copy; 2025 MedFacts 101 | Michael Okyere </p>
-  </footer>
-<style>
-body {
-  font-family: 'Helvetica Neue', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #fefefe;
-  color: #333;
-}
+    .sidebar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
 
-header {
-  background-color: lightblue;
-  padding: 1rem 2rem;
-  text-align: center;
-  color: black;
-  font-family: 'Helvetica Neue', sans-serif;
-}
+    .sidebar a {
+      color: #003366;
+      font-weight: bold;
+      text-decoration: none;
+    }
 
-header h1 {
-  margin: 0.5rem 0;
-  font-family: 'Helvetica Neue', sans-serif;
-}
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
 
-nav {
-  margin-top: 0.5rem;
-  
-}
+    nav {
+      margin-top: 1rem;
+    }
 
-nav a {
-  margin: 0 1rem;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
-  font-family: 'Helvetica Neue', sans-serif;
-}
+    nav a {
+      display: inline-block;
+      margin: 0.5rem;
+      color: #003366;
+      text-decoration: none;
+      font-weight: 600;
+    }
 
-main {
-  padding: 2rem;
-}
+    nav a:hover {
+      text-decoration: underline;
+    }
 
-.content {
-  margin-bottom: 2rem;
-  color: black;
-  font-family: 'Helvetica Neue', sans-serif;
-}
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
 
-.content h2 {
-  color: #004080;
-  font-family: 'Helvetica Neue', sans-serif;
-}
+    .content {
+      margin-bottom: 2.5rem;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
 
-.cta {
-  text-align: center;
-  padding: 2rem;
-  background-color: #f0f8ff;
-  border-top: 1px solid #ddd;
-  font-family: 'Helvetica Neue', sans-serif;
-}
+    .content h2 {
+      color: #004080;
+      margin-bottom: 0.5rem;
+    }
 
-.cta .btn {
-  background-color: #00509e;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-}
+    ul {
+      padding-left: 1.5rem;
+    }
 
-.cta .btn:hover {
-  background-color: #003f7f;
-}
+    li {
+      margin-bottom: 0.4rem;
+    }
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #e6f0fa;
-  font-size: 0.9rem;
-  font-family: 'Helvetica Neue', sans-serif;
-}
+    .cta {
+      text-align: center;
+      padding: 2rem;
+      background-color: #eaf4fc;
+      border-radius: 12px;
+      margin-top: 2rem;
+    }
 
-.sidebar {
-  background-color: lightblue;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 200px;
-}
+    .cta .btn {
+      display: inline-block;
+      background-color: #00509e;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
 
-.sidebar a {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-}
+    .cta .btn:hover {
+      background-color: #003f7f;
+    }
 
-/* --- Media Query for Mobile Devices --- */
-@media screen and (max-width: 600px) {
-  /* This rule applies to devices with a screen width of 600px or less */
-  
-  .sidebar {
-    /* Stack the links vertically instead of horizontally */
-    flex-direction: column;
-    
-    /* Center the stacked links */
-    align-items: center;
-    
-    /* Remove the large gap and use a small margin for spacing */
-    gap: 0;
-  }
-  
-  .sidebar a {
-    /* Add vertical space between the stacked links */
-    margin: 0.5rem 0;
-  }
-  nav{
-    /* Stack the links vertically instead of horizontally */
-    flex-direction: column;
-    
-    /* Center the stacked links */
-    align-items: center;
-    
-    /* Remove the large gap and use a small margin for spacing */
-    gap: 0;
-  }
-  
-  nav a{
-    /* Add vertical space between the stacked links */
-    margin: 0.5rem 0;
-  }
-  main {
-    /* Reduce padding on the sides for smaller screens */
-    padding: 1rem;
-  }
-  
-  header img {
-    /* Ensure the image doesn't get too large on small screens */
-    max-width: 80px;
-  }
-}
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #e6f0fa;
+      font-size: 0.9rem;
+    }
+
+    @media screen and (max-width: 600px) {
+      .sidebar {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+
+      main {
+        padding: 1rem;
+      }
+
+      header img {
+        max-width: 80px;
+      }
+    }
   </style>
+</head>
+
+<body>
+
+<header>
+  <div class="sidebar">
+    <a href="https://medfacts101.netlify.app">Home</a>
+    <a href="https://medfacts101.netlify.app/aboutus">About Us</a>
+    <a href="https://medfacts101.netlify.app/weeklyblogs">Weekly Blogs</a>
+    <a href="https://medfacts101.netlify.app/contact">Contact Us</a>
+  </div>
+
+  <h1>MedFacts 101</h1>
+  <img src="https://ik.imagekit.io/openarmsproj/download.png?updatedAt=1754331082926" alt="MedFacts Logo" />
+
+  <nav>
+    <a href="#prosandcons">Pros, Cons & Dangers</a>
+    <a href="#cause">Causes of Overuse</a>
+    <a href="#plan">Our Plan</a>
+    <a href="#help">How You Can Help</a>
+  </nav>
+</header>
+
+<main>
+
+  <section id="prosandcons" class="content">
+    <h2>Antibiotics: Pros, Cons, and Dangers</h2>
+
+    <p><strong>Pros:</strong></p>
+    <ul>
+      <li>Effective treatment of bacterial infections</li>
+      <li>Significant reduction in mortality from infectious diseases</li>
+    </ul>
+
+    <p><strong>Cons:</strong></p>
+    <ul>
+      <li>At least 30% of prescribed antibiotics in the U.S. are unnecessary</li>
+      <li>Antibiotic resistance is rising rapidly worldwide</li>
+    </ul>
+  </section>
+
+  <section id="cause" class="content">
+    <h2>What Causes Medication Overuse?</h2>
+
+    <p>Several factors contribute to antibiotic overuse and misuse:</p>
+
+    <ul>
+      <li>Medication Overuse
+        <ul>
+          <li>Taking medication more frequently than prescribed</li>
+        </ul>
+      </li>
+
+      <li>Medication Misuse
+        <ul>
+          <li>Using medication in ways not intended by a doctor</li>
+        </ul>
+      </li>
+
+      <li>Lack of Patient Education
+        <ul>
+          <li>Misunderstanding how antibiotics work</li>
+          <li>Expecting antibiotics for viral illnesses</li>
+          <li>Patient pressure influencing prescriptions</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section id="plan" class="content">
+    <h2>What’s the Plan with MedFacts 101?</h2>
+
+    <ul>
+      <li>Post weekly educational slideshows on Instagram about medication use</li>
+      <li>Improve public understanding of antibiotics and health topics</li>
+      <li>Support ongoing efforts like Antibiotic Stewardship Programs (ASPs)</li>
+    </ul>
+  </section>
+
+  <section id="help" class="content">
+    <h2>How You Can Help</h2>
+
+    <ul>
+      <li>Educate others about the dangers of antibiotic overuse</li>
+      <li>Share MedFacts101 with friends and family</li>
+      <li>Suggest topics for future posts</li>
+    </ul>
+  </section>
+
+  <section class="cta">
+    <p><strong>Stay updated with weekly medical insights.</strong></p>
+    <a href="https://forms.gle/3iy38B3MzcbFRVrRA" class="btn">Join Here</a>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 MedFacts 101 | Michael Okyere</p>
+</footer>
+
 </body>
 </html>
