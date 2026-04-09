@@ -3,301 +3,225 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MedFacts 101 Weekly Blogs</title>
+  <title>MedFacts 101 | Weekly Blogs</title>
   <link rel="icon" type="jpg" href="favicon.jpg">
-</head>
-<body>
-  <header>
-    <div class="sidebar">
-      <a href="https://medfacts101.netlify.app">Home</a>
-      <a href="https://medfacts101.netlify.app/aboutus">About Us</a>
-      <a href="https://medfacts101.netlify.app/weeklyblogs">Weekly Blogs</a>
-      <a href="https://medfacts101.netlify.app/contact">Contact Us</a>
-    </div> 
-      <h1>MedFacts 101</h1>
-    <img src="https://ik.imagekit.io/openarmsproj/download.png?updatedAt=1754331082926" alt="MedFacts Logo" />
-    <nav>
-      <a href="#contact">Weekly Blogs</a>
-    </nav>
-  </header>
 
-  <main>
-    <section id="contact" class="content">
-      <h2>Weekly Blogs</h2>
-      <section class="blog-post-grid">
-
-          <div class="blog-post-card">
-            <div class="blog-post-content">
-                    <h3>
-                      <a href="https://medfacts101.netlify.app/weeklyblogs/articlefour.html" target="_blank">MedFacts Linkedin Posts</a>
-                    </h3>
-                    <p class="date">December 21st, 2025; Last Updated: February, 23, 2026</p>
-                    <p>This week on MedFacts101: Following our overview of section 4 o...</p>
-                </div>
-            </div>
-        
-        <div class="blog-post-card">
-            <div class="blog-post-content">
-                    <h3>
-                      <a href="https://medfacts101.netlify.app/weeklyblogs/articlethree.html" target="_blank">Decoding a Prescription Label</a>
-                    </h3>
-                    <p class="date">August 24th, 2025</p>
-                    <p>At some point in your life, you may have seen one of those oran...</p>
-                </div>
-            </div>
-        
-         <div class="blog-post-card">
-            <div class="blog-post-content">
-                    <h3>
-                      <a href="https://medfacts101.netlify.app/weeklyblogs/articletwo.html" target="_blank">Finishing Your Prescription</a>
-                    </h3>
-                    <p class="date">August 17th, 2025</p>
-                    <p>Have you ever dealt with a bacterial illness, and soon you feel...</p>
-                </div>
-            </div>
-        
-            <div class="blog-post-card">
-                <div class="blog-post-content">
-                    <h3>
-                      <a href="https://medfacts101.netlify.app/weeklyblogs/articleone.html" target="_blank">Viral vs Bacterial Infections: Which Medication do I Take?</a>
-                    </h3>
-                    <p class="date">August 10th, 2025</p>
-                    <p>When it comes to taking medication, it is extremely important to...</p>
-                </div>
-            </div>
-        </section>
- 
- <section class= "otherposts">
-      <h2>Instagram Posts</h2>
-      <a href="https://www.instagram.com/p/DM6O7PIxjfh/?img_index=1" class="btn">Introduction</a><br><br><br>
-      <a href="https://www.instagram.com/p/DNMdlxws66W/?img_index=1" class="btn">Viral vs Bacteria Infections</a><br><br><br>
-      <a href="https://www.instagram.com/p/DNo21ZXxy_d/?img_index=1" class="btn">Finishing Your Prescription</a><br><br><br>
-      <a href="https://www.instagram.com/p/DNyePunYiqE/?img_index=1" class="btn">Decoding a Prescription Label</a>
-    </section>
-      <br><br>
-      <section class="cta">
-      <p>Want to receive more information about MedFacts 101?</p>
-      <a href="https://forms.gle/3iy38B3MzcbFRVrRA" class="btn">Click here!</a>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 MedFacts 101</p>
-  </footer>
   <style>
     body {
       font-family: 'Helvetica Neue', sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #fefefe;
+      background-color: #f9fbfd;
       color: #333;
-      font-family: 'Helvetica Neue', sans-serif;
     }
 
     header {
-      background-color: lightblue;
-      padding: 1rem 2rem;
+      background-color: #cfe8f7;
+      padding: 1.5rem 1rem;
       text-align: center;
-      color: black;
-      font-family: 'Helvetica Neue', sans-serif;
     }
 
     header h1 {
       margin: 0.5rem 0;
-      
     }
 
     header img {
       max-width: 100px;
-      height: auto;
-      margin-top: 0.5rem;
     }
 
-    nav {
-      margin-top: 0.5rem;
+    .sidebar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar a {
+      color: #003366;
+      font-weight: bold;
+      text-decoration: none;
     }
 
     nav a {
-      margin: 0 1rem;
-      color: #ffffff;
+      margin: 0.5rem;
+      color: #003366;
+      font-weight: 600;
       text-decoration: none;
-      font-weight: bold;
-      
     }
 
     main {
+      max-width: 1100px;
+      margin: auto;
       padding: 2rem;
     }
 
-    .content {
-      margin-bottom: 2rem;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-
-    .content h2 {
+    h2 {
       color: #004080;
-      font-family: 'Helvetica Neue', sans-serif;
+      margin-bottom: 1rem;
     }
 
+    /* BLOG GRID */
+    .blog-post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .blog-post-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    .blog-post-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .blog-post-content h3 a {
+      color: #00509e;
+      text-decoration: none;
+    }
+
+    .date {
+      font-size: 0.85rem;
+      color: #777;
+      margin: 0.5rem 0;
+    }
+
+    /* INSTAGRAM SECTION */
+    .otherposts {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .otherposts a {
+      display: inline-block;
+      margin: 0.5rem;
+      background-color: #00509e;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .otherposts a:hover {
+      background-color: #003f7f;
+    }
+
+    /* CTA */
     .cta {
       text-align: center;
+      margin-top: 3rem;
       padding: 2rem;
-      background-color: #f0f8ff;
-      border-top: 1px solid #ddd;
-      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #eaf4fc;
+      border-radius: 12px;
     }
 
-    .cta .btn {
+    .cta a {
+      display: inline-block;
       background-color: #00509e;
       color: white;
       padding: 0.75rem 1.5rem;
-      text-decoration: none;
       border-radius: 8px;
+      text-decoration: none;
       font-weight: bold;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-
-    .cta .btn:hover {
-      background-color: #003f7f;
     }
 
     footer {
       text-align: center;
       padding: 1rem;
       background-color: #e6f0fa;
-      font-size: 0.9rem;
-      font-family: 'Helvetica Neue';
-}
-      
- .sidebar {
-  background-color: lightblue;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 200px; 
-}
-
-.sidebar a {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
+      margin-top: 2rem;
     }
-}
-.blog-post-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s, .box-shadow 0.3s;
-        }
 
-        .blog-post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
+    /* MOBILE */
+    @media screen and (max-width: 600px) {
+      .sidebar {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
 
-        .blog-post-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .blog-post-content {
-            padding: 1.5rem;
-        }
-
-        .blog-post-content h3 a {
-            margin-top: 0;
-            color: #00509e;
-            text-decoration: none;
-        }
-
-        .blog-post-content .date {
-            font-size: 0.9rem;
-            color: #777;
-            margin: 0.5rem 0;
-        }
-
-        .blog-post-content p {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-.container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-    .otherposts .btn {
-      background-color: #00509e;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      font-family: 'Helvetica Neue', sans-serif;
+      main {
+        padding: 1rem;
+      }
     }
-@media screen and (max-width: 600px) {
-  /* This rule applies to devices with a screen width of 600px or less */
-  
-  .sidebar {
-    /* Stack the links vertically instead of horizontally */
-    flex-direction: column;
-    
-    /* Center the stacked links */
-    align-items: center;
-    
-    /* Remove the large gap and use a small margin for spacing */
-    gap: 0;
-  }
-  
-  .sidebar a {
-    /* Add vertical space between the stacked links */
-    margin: 0.5rem 0;
-  }
-  nav{
-    /* Stack the links vertically instead of horizontally */
-    flex-direction: column;
-    
-    /* Center the stacked links */
-    align-items: center;
-    
-    /* Remove the large gap and use a small margin for spacing */
-    gap: 0;
-  }
-  
-  nav a{
-    /* Add vertical space between the stacked links */
-    margin: 0.5rem 0;
-  }
-  main {
-    /* Reduce padding on the sides for smaller screens */
-    padding: 1rem;
-  }
-  
-  header img {
-    /* Ensure the image doesn't get too large on small screens */
-    max-width: 80px;
-  }
-  .otherposts { /* Corrected selector */
-    /* Stack the links vertically instead of horizontally */
-    display: flex; /* You must declare the container as a flexbox */
-    flex-direction: column;
-    
-    /* Center the stacked links */
-    align-items: center;
-    
-    /* Remove the large gap and use a small margin for spacing */
-    gap: 0;
-  }
-  
-  .otherposts a {
-    /* Add vertical space between the stacked links */
-    margin: 0.5rem 0;
-  }
-}
   </style>
+</head>
+
+<body>
+
+<header>
+  <div class="sidebar">
+    <a href="https://medfacts101.netlify.app">Home</a>
+    <a href="https://medfacts101.netlify.app/aboutus">About Us</a>
+    <a href="https://medfacts101.netlify.app/weeklyblogs">Weekly Blogs</a>
+    <a href="https://medfacts101.netlify.app/contact">Contact Us</a>
+  </div>
+
+  <h1>MedFacts 101</h1>
+  <img src="https://ik.imagekit.io/openarmsproj/download.png?updatedAt=1754331082926" alt="MedFacts Logo" />
+
+  <nav>
+    <a href="#blogs">Weekly Blogs</a>
+  </nav>
+</header>
+
+<main>
+
+  <section id="blogs">
+    <h2>Weekly Blogs</h2>
+
+    <div class="blog-post-grid">
+
+      <div class="blog-post-card">
+        <h3><a href="https://medfacts101.netlify.app/weeklyblogs/articlefour.html" target="_blank">MedFacts LinkedIn Posts</a></h3>
+        <p class="date">Dec 21, 2025 | Updated Feb 23, 2026</p>
+        <p>This week on MedFacts101: insights from global antimicrobial resistance data...</p>
+      </div>
+
+      <div class="blog-post-card">
+        <h3><a href="https://medfacts101.netlify.app/weeklyblogs/articlethree.html" target="_blank">Decoding a Prescription Label</a></h3>
+        <p class="date">Aug 24, 2025</p>
+        <p>Understanding prescription labels is key to safe medication use...</p>
+      </div>
+
+      <div class="blog-post-card">
+        <h3><a href="https://medfacts101.netlify.app/weeklyblogs/articletwo.html" target="_blank">Finishing Your Prescription</a></h3>
+        <p class="date">Aug 17, 2025</p>
+        <p>Why completing antibiotics matters for preventing resistance...</p>
+      </div>
+
+      <div class="blog-post-card">
+        <h3><a href="https://medfacts101.netlify.app/weeklyblogs/articleone.html" target="_blank">Viral vs. Bacterial Infections</a></h3>
+        <p class="date">Aug 10, 2025</p>
+        <p>Learn the difference and why it affects treatment decisions...</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="otherposts">
+    <h2>Instagram Posts</h2>
+    <a href="#">Introduction</a>
+    <a href="#">Viral vs Bacterial</a>
+    <a href="#">Finishing Prescription</a>
+    <a href="#">Prescription Labels</a>
+  </section>
+
+  <section class="cta">
+    <p><strong>Stay updated with weekly medical insights.</strong></p>
+    <a href="https://forms.gle/3iy38B3MzcbFRVrRA">Join Here</a>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 MedFacts 101 | Michael Okyere</p>
+</footer>
+
 </body>
 </html>
