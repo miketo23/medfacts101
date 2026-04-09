@@ -3,177 +3,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> MedFacts 101 About Us Page</title>
+  <title>MedFacts 101 | About Us</title>
   <link rel="icon" type="jpg" href="favicon.jpg">
+
   <style>
     body {
-  font-family: 'Helvetica Neue', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #fefefe;
-  color: #333;
-}
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9fbfd;
+      color: #333;
+      line-height: 1.6;
+    }
 
-header {
-  background-color: lightblue;
-  padding: 1rem 2rem;
-  text-align: center;
-  color: black;
-}
+    header {
+      background-color: #cfe8f7;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
 
-header h1 {
-  margin: 0.5rem 0;
-}
+    header h1 {
+      margin: 0.5rem 0;
+      font-size: 2rem;
+    }
 
-header img {
-  max-width: 100px;
-  height: auto;
-  margin-top: 0.5rem;
-}
+    header img {
+      max-width: 100px;
+      margin: 0.5rem 0;
+    }
 
-nav {
-  margin-top: 0.5rem;
-}
+    .sidebar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
 
-nav a {
-  margin: 0 1rem;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
-}
+    .sidebar a {
+      color: #003366;
+      font-weight: bold;
+      text-decoration: none;
+    }
 
-main {
-  padding: 2rem;
-}
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
 
-.content {
-  margin-bottom: 2rem;
-}
+    nav {
+      margin-top: 1rem;
+    }
 
-.content h2 {
-  color: #004080;
-}
+    nav a {
+      display: inline-block;
+      margin: 0.5rem;
+      color: #003366;
+      text-decoration: none;
+      font-weight: 600;
+    }
 
-.cta {
-  text-align: center;
-  padding: 2rem;
-  background-color: #f0f8ff;
-  border-top: 1px solid #ddd;
-}
+    nav a:hover {
+      text-decoration: underline;
+    }
 
-.cta .btn {
-  background-color: #00509e;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-}
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
 
-.cta .btn:hover {
-  background-color: #003f7f;
-}
+    .content {
+      margin-bottom: 2.5rem;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #e6f0fa;
-  font-size: 0.9rem;
-}
+    .content h2 {
+      color: #004080;
+      margin-bottom: 0.5rem;
+    }
 
-.sidebar {
-  background-color: lightblue;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 200px;
-}
+    .cta {
+      text-align: center;
+      padding: 2rem;
+      background-color: #eaf4fc;
+      border-radius: 12px;
+      margin-top: 2rem;
+    }
 
-.sidebar a {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-}
+    .cta .btn {
+      display: inline-block;
+      background-color: #00509e;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
 
-/* --- Media Query for Mobile Devices --- */
-@media screen and (max-width: 600px) {
-  /* This rule applies to devices with a screen width of 600px or less */
-  
-  .sidebar {
-    /* Stack the links vertically instead of horizontally */
-    flex-direction: column;
-    
-    /* Center the stacked links */
-    align-items: center;
-    
-    /* Remove the large gap and use a small margin for spacing */
-    gap: 0;
-  }
-  
-  .sidebar a {
-    /* Add vertical space between the stacked links */
-    margin: 0.5rem 0;
-  }
-  
-  main {
-    /* Reduce padding on the sides for smaller screens */
-    padding: 1rem;
-  }
-  
-  header img {
-    /* Ensure the image doesn't get too large on small screens */
-    max-width: 80px;
-  }
-}
+    .cta .btn:hover {
+      background-color: #003f7f;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #e6f0fa;
+      font-size: 0.9rem;
+    }
+
+    @media screen and (max-width: 600px) {
+      .sidebar {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+
+      main {
+        padding: 1rem;
+      }
+
+      header img {
+        max-width: 80px;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="sidebar">
-      <a href="https://medfacts101.netlify.app">Home</a>
-      <a href="https://medfacts101.netlify.app/aboutus">About Us</a>
-      <a href="https://medfacts101.netlify.app/weeklyblogs">Weekly Blogs</a>
-      <a href="https://medfacts101.netlify.app/contact">Contact Us</a>
-    </div> 
-    <h1>MedFacts 101</h1>
-    <img src="https://ik.imagekit.io/openarmsproj/download.png?updatedAt=1754331082926" alt="MedFacts Logo" />
-    <nav>
-      <a href="#mission">Mission Statement</a>
-      <a href="#about">Info About Us</a>
-      <a href="#plan">What We Plan on Doing</a>
-    </nav>
-  </header>
 
-  <main>
-    <section id="mission" class="content">
-      <h2>Mission Statement</h2>
-      <p>
-        MedFacts 101 aims to help fix the patient education gap on medication usage.
-    </section>
+<header>
+  <div class="sidebar">
+    <a href="https://medfacts101.netlify.app">Home</a>
+    <a href="https://medfacts101.netlify.app/aboutus">About Us</a>
+    <a href="https://medfacts101.netlify.app/weeklyblogs">Weekly Blogs</a>
+    <a href="https://medfacts101.netlify.app/contact">Contact Us</a>
+  </div>
 
-    <section id="about" class="content">
-      <h2>Info About Us</h2>
-      <p>
-       I am Michael Okyere, a rising junior high-school student living in NYC. <br><br> I want to address one of the biggest ongoing crises right now: medication overdosing.
-      </p>
-    </section>
+  <h1>MedFacts 101</h1>
+  <img src="https://ik.imagekit.io/openarmsproj/download.png?updatedAt=1754331082926" alt="MedFacts Logo" />
 
-    <section id="plan" class="content">
-      <h2>What We Plan on Doing</h2>
-      <p>
-        There are weekly lessons, either on the Blog or on Instagram, providing information to best optimize a patient's experience with a medication. 
-      </p>
-      </p>
-    </section>
+  <nav>
+    <a href="#mission">Mission</a>
+    <a href="#about">About</a>
+    <a href="#plan">Our Approach</a>
+  </nav>
+</header>
 
-    <section class="cta">
-      <p>Want to receive more information about the Open Arms project?</p>
-      <a href="https://forms.gle/3iy38B3MzcbFRVrRA" class="btn">Click here!</a>
-    </section>
-  </main>
+<main>
 
-  <footer>
-    <p>&copy; 2025 MedFacts 101</p>
-  </footer>
+  <section id="mission" class="content">
+    <h2>Mission Statement</h2>
+    <p>
+      MedFacts 101 aims to address the gap in patient education by making medication-related information clear, accessible, and easy to understand for a broad audience.
+    </p>
+  </section>
+
+  <section id="about" class="content">
+    <h2>About</h2>
+    <p>
+      My name is Michael Okyere, and I am a high school student based in New York City with a strong interest in medicine and public health.
+    </p>
+    <p>
+      MedFacts 101 was created to address ongoing challenges in healthcare education—particularly medication misuse, misunderstanding, and overuse—by providing reliable and digestible medical information.
+    </p>
+  </section>
+
+  <section id="plan" class="content">
+    <h2>Our Approach</h2>
+    <p>
+      MedFacts 101 delivers weekly educational content through blog posts and Instagram slideshows, focusing on improving understanding of medication use and promoting safer health practices.
+    </p>
+    <p>
+      The goal is to contribute to broader public health efforts, including those supported by Antibiotic Stewardship Programs (ASPs), by increasing awareness and encouraging informed decision-making.
+    </p>
+  </section>
+
+  <section class="cta">
+    <p><strong>Stay updated with weekly medical insights.</strong></p>
+    <a href="https://forms.gle/3iy38B3MzcbFRVrRA" class="btn">Join Here</a>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 MedFacts 101 | Michael Okyere</p>
+</footer>
+
 </body>
 </html>
