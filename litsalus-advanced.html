@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Litsalus Advanced</title>
+<style>
+:root{
+    --amber:#d18b23;
+    --amber2:#f5d8a2;
+    --paper:#fffdf8;
+    --ink:#222;
+    --accent:#1368ce;
+    --good:#1b8f42;
+    --bad:#cf2d2d;
+    --shadow:0 12px 35px rgba(0,0,0,.18);
+}
+
+*{box-sizing:border-box;}
+
+body{
+    margin:0;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:linear-gradient(135deg,#00002E,#00002E);
+    color:var(--ink);
+    display:flex;
+    justify-content:center;
+    padding:24px;
+}
+
+.game{
+    width:min(900px,100%);
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+h1{
+    margin:0;
+    font-size:2rem;
+    color:white;
+}
+
+.stats{
+    display:flex;
+    gap:20px;
+    font-weight:700;
+}
+
+.hearts{
+    color:#d33;
+    font-size:1.4rem;
+}
+
+.label{
+    background:linear-gradient(90deg,var(--amber) 0 28px,var(--paper) 28px);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    border:4px solid #c27d13;
+}
+
+.label-inner{
+    padding:26px 26px 26px 42px;
+}
+
+.rx{
+    font-size:2.5rem;
+    color:#8d4f00;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.pharmacy{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    border-bottom:2px dashed #bbb;
+    padding-bottom:10px;
+    margin-bottom:16px;
+    gap:8px;
+}
+
+.med{
+    font-size:1.5rem;
+    font-weight:700;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:10px;
+    align-items:center;
+}
+
+.sig{
+    background:#fff;
+    border:2px solid #ddd;
+    padding:16px;
+    border-radius:12px;
+    font-size:1.2rem;
+}
+
+.highlight{
+    background:yellow;
+    font-weight:900;
+    padding:2px 5px;
+    border-radius:4px;
+}
+
+.offer{
+    margin-top:20px;
+    background:#eef7ff;
+    border-left:5px solid var(--accent);
+    padding:16px;
+    border-radius:10px;
+    font-size:1.15rem;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    margin-top:26px;
+}
+
+button{
+    flex:1;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    font-size:1.1rem;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.correct{
+    background:var(--good);
+    color:white;
+}
+
+.incorrect{
+    background:var(--bad);
+    color:white;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.feedback{
+    margin-top:18px;
+    min-height:28px;
+    font-weight:700;
+    font-size:1.05rem;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.7);
+}
+
+.panel{
+    background:white;
+    padding:40px;
+    border-radius:18px;
+    text-align:center;
+    width:min(400px,90%);
+}
+
+.panel h2{
+    margin-top:0;
+}
+
+.restart{
+    background:var(--accent);
+    color:white;
+    margin-top:18px;
+}
+
+.small{
+    color:#666;
+    font-size:.92rem;
+}
+
+@media(max-width:650px){
+.grid{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="game">
+
+<header>
+<div>
+<h1>💊 Litsalus Advanced</h1>
+<div class="small">Decide whether the offered translation is completely correct.</div>
+</div>
+
+<div class="stats">
+<div>Score: <span id="score">0</span></div>
+<div>Best: <span id="best">0</span></div>
+<div class="hearts" id="hearts"></div>
+</div>
+</header>
+
+<div class="label">
+<div class="label-inner">
+
+<div class="rx">℞</div>
+
+<div class="pharmacy">
+<div>
+<div><strong>Community Care Pharmacy</strong></div>
+<div>Patient: Jane Doe</div>
+</div>
+
+<div>
+<div id="rxnum"></div>
+<div id="date"></div>
+</div>
+</div>
+
+<div class="med" id="med"></div>
+
+<div class="grid">
+<div class="sig">
+SIG:
+<span id="sig"></span>
+</div>
+
+<div>
+Qty:
+<div id="qty"></div>
+</div>
+</div>
+
+<div class="offer">
+<strong>Offered Translation</strong>
+<p id="translation"></p>
+</div>
+
+<div class="buttons">
+<button class="correct" onclick="answer(true)">✔ Correct</button>
+<button class="incorrect" onclick="answer(false)">✖ Incorrect</button>
+</div>
+
+<div class="feedback" id="feedback"></div>
+
+</div>
+</div>
+
+</div>
+
+<div class="overlay" id="gameOver">
+<div class="panel">
+<h2>Game Over</h2>
+<p>Your High Score</p>
+<h1 id="finalScore"></h1>
+<button class="restart" onclick="restart()">Play Again</button>
+</div>
+</div>
+
+<script>
+
+const meds=[
+"Amoxicillin 500 mg Capsules",
+"Lisinopril 10 mg Tablets",
+"Metformin 500 mg Tablets",
+"Atorvastatin 20 mg Tablets",
+"Ibuprofen 600 mg Tablets",
+"Levothyroxine 50 mcg Tablets",
+"Cephalexin 500 mg Capsules",
+"Prednisone 20 mg Tablets",
+"Azithromycin 250 mg Tablets",
+"Losartan 50 mg Tablets"
+];
+
+const quantities=[20,30,60,90,120];
+
+const doseOptions=[
+{sig:"1 tab",text:"Take 1 tablet"},
+{sig:"2 tabs",text:"Take 2 tablets"},
+{sig:"1 cap",text:"Take 1 capsule"},
+{sig:"2 caps",text:"Take 2 capsules"}
+];
+
+const routes=[
+{sig:"PO",text:"by mouth"},
+{sig:"SL",text:"under the tongue"},
+{sig:"PR",text:"rectally"},
+{sig:"OU",text:"into both eyes"},
+{sig:"OS",text:"into the left eye"},
+{sig:"OD",text:"into the right eye"}
+];
+
+const freqs=[
+{sig:"QD",text:"once a day"},
+{sig:"BID",text:"twice a day"},
+{sig:"TID",text:"three times a day"},
+{sig:"QID",text:"four times a day"},
+{sig:"QHS",text:"at bedtime"},
+{sig:"Q4H",text:"every 4 hours"},
+{sig:"Q6H",text:"every 6 hours"}
+];
+
+let score=0;
+let hearts=3;
+let currentCorrect=true;
+
+const scoreEl=document.getElementById("score");
+const bestEl=document.getElementById("best");
+
+let best=Number(localStorage.getItem("sigBest")||0);
+bestEl.textContent=best;
+
+function rand(a){
+return a[Math.floor(Math.random()*a.length)];
+}
+
+function randomDate(){
+return new Date().toLocaleDateString();
+}
+
+function makePuzzle(){
+
+document.getElementById("feedback").textContent="";
+
+const med=rand(meds);
+const qty=rand(quantities);
+const dose=rand(doseOptions);
+const route=rand(routes);
+const freq=rand(freqs);
+
+const parts=[dose.sig,route.sig,freq.sig];
+
+const highlightIndex=Math.floor(Math.random()*3);
+
+let sigHTML="";
+
+parts.forEach((p,i)=>{
+if(i===highlightIndex){
+sigHTML+=`<span class='highlight'>${p}</span> `;
+}else{
+sigHTML+=p+" ";
+}
+});
+
+document.getElementById("sig").innerHTML=sigHTML.trim();
+
+let translation=`${dose.text} ${route.text} ${freq.text}.`;
+
+currentCorrect=Math.random()<0.5;
+
+if(!currentCorrect){
+
+const sabotageRoute=Math.random()<0.5;
+
+if(sabotageRoute){
+
+let wrong=rand(routes);
+while(wrong.sig===route.sig) wrong=rand(routes);
+
+translation=`${dose.text} ${wrong.text} ${freq.text}.`;
+
+}else{
+
+let wrong=rand(freqs);
+while(wrong.sig===freq.sig) wrong=rand(freqs);
+
+translation=`${dose.text} ${route.text} ${wrong.text}.`;
+
+}
+
+}
+
+document.getElementById("translation").textContent=translation;
+document.getElementById("med").textContent=med;
+document.getElementById("qty").textContent=qty;
+document.getElementById("date").textContent=randomDate();
+document.getElementById("rxnum").textContent="Rx #"+Math.floor(100000+Math.random()*900000);
+
+}
+
+function answer(playerSaysCorrect){
+
+if(playerSaysCorrect===currentCorrect){
+
+score++;
+scoreEl.textContent=score;
+
+if(score>best){
+best=score;
+localStorage.setItem("sigBest",best);
+bestEl.textContent=best;
+}
+
+document.getElementById("feedback").style.color="green";
+document.getElementById("feedback").textContent="Correct!";
+makePuzzle();
+
+}else{
+
+hearts--;
+updateHearts();
+
+document.getElementById("feedback").style.color="red";
+document.getElementById("feedback").textContent="Incorrect.";
+
+if(hearts<=0){
+gameOver();
+}else{
+makePuzzle();
+}
+
+}
+
+}
+
+function updateHearts(){
+
+document.getElementById("hearts").textContent=
+"❤️".repeat(hearts)+"🖤".repeat(3-hearts);
+
+}
+
+function gameOver(){
+
+document.getElementById("finalScore").textContent=best;
+document.getElementById("gameOver").style.display="flex";
+
+}
+
+function restart(){
+
+score=0;
+hearts=3;
+scoreEl.textContent=0;
+updateHearts();
+document.getElementById("gameOver").style.display="none";
+makePuzzle();
+
+}
+
+updateHearts();
+makePuzzle();
+
+</script>
+
+</body>
+</html>
