@@ -229,7 +229,7 @@ grid-template-columns:1fr;
 <div class="pharmacy">
 <div>
 <div><strong>Community Care Pharmacy</strong></div>
-<div>Patient: Jane Doe</div>
+<div>Patient: <span id="patient"></span></div>
 </div>
 
 <div>
@@ -280,6 +280,26 @@ Qty:
 
 <script>
 
+const firstNames = [
+  "James","Mary","John","Patricia","Robert","Jennifer",
+  "Michael","Linda","William","Elizabeth","David","Susan",
+  "Richard","Jessica","Joseph","Sarah","Thomas","Emily",
+  "Daniel","Ashley","Christopher","Olivia","Matthew","Sophia",
+  "Anthony","Emma","Noah","Ava","Liam","Charlotte"
+];
+
+const lastNames = [
+  "Smith","Johnson","Williams","Brown","Jones","Garcia",
+  "Miller","Davis","Rodriguez","Martinez","Hernandez",
+  "Lopez","Gonzalez","Wilson","Anderson","Thomas",
+  "Taylor","Moore","Jackson","Martin","Lee","Perez",
+  "Thompson","White","Harris","Clark","Lewis","Young"
+];
+
+function randomPatientName() {
+    return `${rand(firstNames)} ${rand(lastNames)}`;
+}
+    
 const meds=[
 "Amoxicillin 500 mg Capsules",
 "Lisinopril 10 mg Tablets",
@@ -477,6 +497,8 @@ makePuzzle();
 
 updateHearts();
 makePuzzle();
+
+document.getElementById("patient").textContent = randomPatientName();
 
 </script>
 
