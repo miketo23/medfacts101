@@ -161,6 +161,27 @@ button:hover{
     font-size:1.05rem;
 }
 
+.flash{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .3s;
+    z-index:9999;
+}
+
+.flash.show{
+    opacity:.35;
+}
+
+.flash.correct{
+    background:#2ecc71;
+}
+
+.flash.incorrect{
+    background:#e74c3c;
+}
+
 .overlay{
     position:fixed;
     inset:0;
@@ -210,7 +231,7 @@ grid-template-columns:1fr;
 
 <header>
 <div>
-<h1>💊 Litsalus </h1>
+<h1> Litsalus </h1>
 <div class="small">Decide whether the offered translation is completely correct.</div>
 </div>
 
@@ -258,8 +279,8 @@ Qty:
 </div>
 
 <div class="buttons">
-<button class="correct" onclick="answer(true)">✔ Correct</button>
-<button class="incorrect" onclick="answer(false)">✖ Incorrect</button>
+<button class="correct" onclick="answer(true)"> Yes </button>
+<button class="incorrect" onclick="answer(false)"> No </button>
 </div>
 
 <div class="feedback" id="feedback"></div>
@@ -277,6 +298,7 @@ Qty:
 <button class="restart" onclick="restart()">Play Again</button>
 </div>
 </div>
+<div id="flash" class="flash"></div>
 
 <script>
 
@@ -440,6 +462,7 @@ document.getElementById("patient").textContent = randomPatientName();
 function answer(playerSaysCorrect){
 
 if(playerSaysCorrect===currentCorrect){
+    flashScreen("correct");
 
 score++;
 scoreEl.textContent=score;
@@ -494,6 +517,18 @@ scoreEl.textContent=0;
 updateHearts();
 document.getElementById("gameOver").style.display="none";
 makePuzzle();
+
+}
+
+function flashScreen(type){
+
+    const flash=document.getElementById("flash");
+
+    flash.className="flash "+type+" show";
+
+    setTimeout(()=>{
+        flash.classList.remove("show");
+    },300);
 
 }
 
