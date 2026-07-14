@@ -361,6 +361,7 @@ function makePuzzle(){
 
 document.getElementById("feedback").textContent="";
 
+
 const med=rand(meds);
 const qty=rand(quantities);
 const dose=rand(doseOptions);
@@ -432,6 +433,7 @@ document.getElementById("med").textContent=med;
 document.getElementById("qty").textContent=qty;
 document.getElementById("date").textContent=randomDate();
 document.getElementById("rxnum").textContent="Rx #"+Math.floor(100000+Math.random()*900000);
+document.getElementById("patient").textContent = randomPatientName();
 
 }
 
@@ -497,8 +499,6 @@ makePuzzle();
 
 updateHearts();
 makePuzzle();
-
-document.getElementById("patient").textContent = randomPatientName();
 
 </script>
 
