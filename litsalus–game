@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Litsalus</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+    --ink:#2b2018;
+    --paper:#fbf3e3;
+    --amber:#c17817;
+    --amber-deep:#8a530c;
+    --amber-light:#e8b563;
+    --pen-blue:#2c5f8a;
+    --stamp-green:#1f6b3a;
+    --stamp-red:#a3242c;
+    --bg:#140f0c;
+    --shadow:0 18px 40px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box;}
+
+body{
+    margin:0;
+    font-family:'Lora',serif;
+    background:
+        radial-gradient(ellipse 900px 500px at 50% -10%, rgba(193,120,23,.20), transparent 65%),
+        var(--bg);
+    color:var(--ink);
+    display:flex;
+    justify-content:center;
+    padding:32px 20px;
+}
+
+.game{ width:min(880px,100%); }
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:36px;
+    flex-wrap:wrap;
+    gap:18px;
+}
+
+h1{
+    margin:0;
+    font-size:2.4rem;
+    font-weight:700;
+    color:#fbf3e3;
+    letter-spacing:.5px;
+}
+
+.tagline{
+    font-family:'Space Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--amber-light);
+    margin-top:6px;
+    opacity:.85;
+    max-width:32ch;
+    line-height:1.5;
+}
+
+.mode-toggle{
+    display:flex;
+    gap:8px;
+    margin-top:16px;
+}
+
+.mode-tab{
+    font-family:'Space Mono',monospace;
+    font-size:.68rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    padding:7px 14px;
+    border:1.5px solid rgba(232,181,99,.5);
+    border-radius:3px;
+    background:rgba(0,0,0,.25);
+    color:var(--amber-light);
+    cursor:pointer;
+    transition:.15s;
+    transform:rotate(-1.5deg);
+}
+
+.mode-tab:nth-child(2){ transform:rotate(1.5deg); }
+
+.mode-tab.active{
+    background:var(--amber);
+    border-color:var(--amber);
+    color:#241705;
+    transform:rotate(0deg) scale(1.05);
+}
+
+.mode-tab:hover:not(.active){
+    border-color:var(--amber-light);
+    color:#fff;
+}
+
+.mode-hint{
+    font-family:'Space Mono',monospace;
+    font-size:.68rem;
+    color:rgba(251,243,227,.55);
+    margin-top:10px;
+    letter-spacing:.3px;
+}
+
+.stats-panel{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    font-family:'Space Mono',monospace;
+    background:rgba(0,0,0,.25);
+    border:1px solid rgba(232,181,99,.25);
+    border-radius:6px;
+    padding:10px 18px;
+}
+
+.stat{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    color:#fbf3e3;
+}
+
+.stat-label{
+    font-size:.6rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--amber-light);
+    opacity:.8;
+}
+
+.stat-value{
+    font-size:1.15rem;
+    font-weight:700;
+}
+
+.hearts{ font-size:1.2rem; }
+
+/* ---- the prescription slip, styled as a torn triplicate carbon-copy ---- */
+
+.slip-stack{
+    position:relative;
+    padding:26px 22px 34px;
+}
+
+.copy{
+    position:absolute;
+    inset:26px 22px 34px;
+    border-radius:16px;
+}
+
+.copy-pink{
+    background:#e2a8a2;
+    transform:rotate(-3deg) translate(-10px,10px);
+}
+
+.copy-yellow{
+    background:#eccf7d;
+    transform:rotate(2.5deg) translate(12px,14px);
+}
+
+.label{
+    position:relative;
+    background:linear-gradient(90deg,var(--amber) 0 26px, var(--paper) 26px);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    border:3px solid var(--amber-deep);
+    transform:rotate(-0.6deg);
+    overflow:hidden;
+}
+
+.perf{
+    height:16px;
+    background-image:radial-gradient(circle at center, var(--bg) 5.5px, transparent 6px);
+    background-size:18px 16px;
+    background-position:9px 0;
+    background-repeat:repeat-x;
+    opacity:.9;
+}
+
+.label-inner{ padding:6px 26px 26px 40px; }
+
+.rx{
+    font-size:2.2rem;
+    color:var(--amber-deep);
+    font-weight:900;
+    margin-bottom:2px;
+    font-family:'Lora',serif;
+}
+
+.pharmacy{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    border-bottom:1.5px dashed rgba(0,0,0,.25);
+    padding-bottom:10px;
+    margin-bottom:16px;
+    gap:8px;
+}
+
+.pharmacy-name{
+    font-family:'Lora',serif;
+    font-weight:700;
+    font-size:1.05rem;
+}
+
+.meta-line{
+    font-family:'Space Mono',monospace;
+    font-size:.82rem;
+    color:#4a3a24;
+    margin-top:2px;
+}
+
+.meta-right{
+    text-align:right;
+    font-family:'Space Mono',monospace;
+    font-size:.82rem;
+    color:#4a3a24;
+}
+
+.med{
+    font-family:'Lora',serif;
+    font-size:1.55rem;
+    font-weight:700;
+    margin-bottom:14px;
+    color:var(--ink);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:12px;
+    align-items:stretch;
+}
+
+.sig{
+    background:rgba(255,255,255,.6);
+    border:1.5px solid rgba(0,0,0,.15);
+    padding:16px;
+    border-radius:4px;
+    font-family:'Space Mono',monospace;
+    font-size:1.05rem;
+    line-height:1.55;
+}
+
+.sig-label{
+    font-weight:700;
+    letter-spacing:1px;
+    margin-right:4px;
+}
+
+.highlight{
+    background:#f7e26b;
+    font-weight:700;
+    padding:1px 4px;
+    border-radius:2px;
+}
+
+.qty-box{
+    background:rgba(255,255,255,.6);
+    border:1.5px solid rgba(0,0,0,.15);
+    border-radius:4px;
+    padding:12px 20px;
+    text-align:center;
+    font-family:'Space Mono',monospace;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.qty-label{
+    font-size:.62rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:#6b5a3c;
+}
+
+#qty{ font-size:1.3rem; font-weight:700; }
+
+.offer{
+    margin-top:20px;
+    background:rgba(255,255,255,.55);
+    border-left:3px solid var(--pen-blue);
+    padding:14px 16px;
+    border-radius:2px;
+}
+
+.offer strong{
+    font-family:'Lora',serif;
+    font-size:1.02rem;
+    display:block;
+    margin-bottom:6px;
+    font-weight:700;
+}
+
+.offer p{
+    font-family:'Space Mono',monospace;
+    font-size:.95rem;
+    margin:0;
+    line-height:1.55;
+}
+
+.buttons{
+    display:flex;
+    gap:16px;
+    margin-top:26px;
+}
+
+button{
+    flex:1;
+    padding:14px;
+    cursor:pointer;
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:.9rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    border-radius:6px 14px 8px 14px;
+    transition:.15s;
+    background:transparent;
+}
+
+.correct{
+    border:3px solid var(--stamp-green);
+    color:var(--stamp-green);
+    transform:rotate(-1deg);
+}
+
+.incorrect{
+    border:3px solid var(--stamp-red);
+    color:var(--stamp-red);
+    transform:rotate(1deg);
+}
+
+button:hover{
+    transform:scale(1.03) rotate(0deg);
+    background:rgba(0,0,0,.04);
+}
+
+button:focus-visible{
+    outline:3px solid var(--pen-blue);
+    outline-offset:2px;
+}
+
+.mode-tab:focus-visible{
+    outline:3px solid var(--pen-blue);
+    outline-offset:2px;
+}
+
+.feedback{
+    margin-top:16px;
+    min-height:26px;
+    font-family:'Lora',serif;
+    font-weight:700;
+    font-size:1.05rem;
+}
+
+.flash{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .3s;
+    z-index:9999;
+}
+
+.flash.show{ opacity:.32; }
+.flash.correct{ background:var(--stamp-green); }
+.flash.incorrect{ background:var(--stamp-red); }
+
+.overlay{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.75);
+}
+
+.panel{
+    background:var(--paper);
+    padding:38px 40px;
+    border-radius:12px;
+    text-align:center;
+    width:min(380px,90%);
+    border:3px solid var(--amber-deep);
+    transform:rotate(-0.5deg);
+    box-shadow:var(--shadow);
+}
+
+.panel h2{
+    font-family:'Lora',serif;
+    margin-top:0;
+}
+
+.panel p{
+    font-family:'Space Mono',monospace;
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:#6b5a3c;
+}
+
+#finalScore{
+    font-family:'Lora',serif;
+    color:var(--amber-deep);
+    margin:6px 0 0;
+}
+
+.restart{
+    background:var(--pen-blue);
+    color:white;
+    margin-top:20px;
+    border:none;
+    border-radius:8px;
+    transform:none;
+    font-family:'Lora',serif;
+    text-transform:none;
+    letter-spacing:0;
+    font-size:1rem;
+}
+
+.restart:hover{ transform:translateY(-2px); background:#24506f; }
+
+@media(max-width:650px){
+.grid{ grid-template-columns:1fr; }
+.slip-stack{ padding:18px 12px 26px; }
+.copy{ inset:18px 12px 26px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+*{ transition:none !important; }
+button:hover{ transform:none; }
+}
+</style>
+</head>
+<body>
+<div id="menuScreen">
+
+    <h1>Litsalus</h1>
+
+    <p class="tagline">
+        Test your ability to interpret prescription SIG codes.
+    </p>
+
+    <div style="margin-top:40px;">
+        <button class="restart" onclick="startGame('regular')">
+            Regular Mode
+        </button>
+
+        <button class="restart" onclick="startGame('advanced')">
+            Advanced Mode
+        </button>
+    </div>
+
+</div>
+<div class="game" id="gameScreen" style="display:none;">
+
+<header>
+<button class="restart"
+        style="max-width:140px;margin-bottom:20px;"
+        onclick="backToMenu()">
+← Back
+</button>
+<div>
+<h1>Litsalus</h1>
+<div class="tagline">Decide whether the offered translation is completely correct.</div>
+
+
+</div>
+
+<div class="stats-panel">
+<div class="stat"><span class="stat-label">Score</span><span class="stat-value" id="score">0</span></div>
+<div class="stat"><span class="stat-label">Best</span><span class="stat-value" id="best">0</span></div>
+<div class="stat hearts" id="hearts"></div>
+</div>
+</header>
+
+<div class="slip-stack">
+<div class="copy copy-yellow"></div>
+<div class="copy copy-pink"></div>
+
+<div class="label">
+<div class="perf"></div>
+<div class="label-inner">
+
+<div class="rx">℞</div>
+
+<div class="pharmacy">
+<div>
+<div class="pharmacy-name">Community Care Pharmacy</div>
+<div class="meta-line">Patient: <span id="patient"></span></div>
+</div>
+
+<div class="meta-right">
+<div id="rxnum"></div>
+<div id="date"></div>
+</div>
+</div>
+
+<div class="med" id="med"></div>
+
+<div class="grid">
+<div class="sig">
+<span class="sig-label">SIG:</span>
+<span id="sig"></span>
+</div>
+
+<div class="qty-box">
+<span class="qty-label">Qty</span>
+<div id="qty"></div>
+</div>
+</div>
+
+<div class="offer">
+<strong id="offerLabel">Does this match the highlighted instruction?</strong>
+<p id="translation"></p>
+</div>
+
+<div class="buttons">
+<button class="correct" onclick="answer(true)">✔ Correct</button>
+<button class="incorrect" onclick="answer(false)">✖ Incorrect</button>
+</div>
+
+<div class="feedback" id="feedback"></div>
+
+</div>
+</div>
+</div>
+
+</div>
+
+<div class="overlay" id="gameOver">
+<div class="panel">
+<h2>Game Over</h2>
+<p>Your High Score</p>
+<h1 id="finalScore"></h1>
+<button class="restart" onclick="restart()">Play Again</button>
+</div>
+</div>
+<div id="flash" class="flash"></div>
+
+<script>
+
+const firstNames = [
+  "James","Mary","John","Patricia","Robert","Jennifer",
+  "Michael","Linda","William","Elizabeth","David","Susan",
+  "Richard","Jessica","Joseph","Sarah","Thomas","Emily",
+  "Daniel","Ashley","Christopher","Olivia","Matthew","Sophia",
+  "Anthony","Emma","Noah","Ava","Liam","Charlotte"
+];
+
+const lastNames = [
+  "Smith","Johnson","Williams","Brown","Jones","Garcia",
+  "Miller","Davis","Rodriguez","Martinez","Hernandez",
+  "Lopez","Gonzalez","Wilson","Anderson","Thomas",
+  "Taylor","Moore","Jackson","Martin","Lee","Perez",
+  "Thompson","White","Harris","Clark","Lewis","Young"
+];
+
+function randomPatientName() {
+    return `${rand(firstNames)} ${rand(lastNames)}`;
+}
+
+const meds=[
+"Amoxicillin 500 mg Capsules",
+"Lisinopril 10 mg Tablets",
+"Metformin 500 mg Tablets",
+"Atorvastatin 20 mg Tablets",
+"Ibuprofen 600 mg Tablets",
+"Levothyroxine 50 mcg Tablets",
+"Cephalexin 500 mg Capsules",
+"Prednisone 20 mg Tablets",
+"Azithromycin 250 mg Tablets",
+"Losartan 50 mg Tablets"
+];
+
+const quantities=[20,30,60,90,120];
+
+const doseOptions=[
+{sig:"1 tab",text:"Take 1 tablet"},
+{sig:"2 tabs",text:"Take 2 tablets"},
+{sig:"1 cap",text:"Take 1 capsule"},
+{sig:"2 caps",text:"Take 2 capsules"}
+];
+
+const routes=[
+{sig:"PO",text:"by mouth"},
+{sig:"SL",text:"under the tongue"},
+{sig:"PR",text:"rectally"},
+{sig:"OU",text:"into both eyes"},
+{sig:"OS",text:"into the left eye"},
+{sig:"OD",text:"into the right eye"}
+];
+
+const freqs=[
+{sig:"QD",text:"once a day"},
+{sig:"BID",text:"twice a day"},
+{sig:"TID",text:"three times a day"},
+{sig:"QID",text:"four times a day"},
+{sig:"QHS",text:"at bedtime"},
+{sig:"Q4H",text:"every 4 hours"},
+{sig:"Q6H",text:"every 6 hours"}
+];
+
+let score=0;
+let hearts=3;
+let currentCorrect=true;
+let mode="regular";
+
+let currentDose, currentRoute, currentFreq, currentHighlightIndex;
+
+const scoreEl=document.getElementById("score");
+const bestEl=document.getElementById("best");
+
+let best=Number(localStorage.getItem("sigBest")||0);
+bestEl.textContent=best;
+
+function rand(a){
+return a[Math.floor(Math.random()*a.length)];
+}
+
+function randomDate(){
+return new Date().toLocaleDateString();
+}
+
+function renderSig(){
+
+const parts = mode==="advanced"
+? [currentDose.sig, currentRoute.sig, currentFreq.sig]
+: [currentDose.text, currentRoute.text, currentFreq.text];
+
+let sigHTML="";
+
+parts.forEach((p,i)=>{
+if(i===currentHighlightIndex){
+sigHTML+=`<span class="highlight">${p}</span> `;
+}else{
+sigHTML+=p+" ";
+}
+});
+
+sigHTML=sigHTML.trim();
+
+if(mode==="regular"){
+sigHTML+=".";
+}
+
+document.getElementById("sig").innerHTML=sigHTML;
+
+document.getElementById("offerLabel").textContent = mode==="advanced"
+? "Offered Translation"
+: "Does this match the highlighted instruction?";
+
+document.getElementById("modeHint").textContent = mode==="advanced"
+? "SIG shown in medical shorthand"
+: "SIG shown in plain English";
+
+}
+
+function makePuzzle(){
+
+document.getElementById("feedback").textContent="";
+
+const med=rand(meds);
+const qty=rand(quantities);
+
+currentDose=rand(doseOptions);
+currentRoute=rand(routes);
+currentFreq=rand(freqs);
+currentHighlightIndex=Math.floor(Math.random()*3);
+
+let translation=`${currentDose.text} ${currentRoute.text} ${currentFreq.text}.`;
+
+currentCorrect=Math.random()<0.5;
+
+if(!currentCorrect){
+
+const error=Math.floor(Math.random()*3);
+
+if(error===0){
+let wrong=rand(doseOptions);
+while(wrong.text===currentDose.text) wrong=rand(doseOptions);
+translation=`${wrong.text} ${currentRoute.text} ${currentFreq.text}.`;
+}
+
+if(error===1){
+let wrong=rand(routes);
+while(wrong.text===currentRoute.text) wrong=rand(routes);
+translation=`${currentDose.text} ${wrong.text} ${currentFreq.text}.`;
+}
+
+if(error===2){
+let wrong=rand(freqs);
+while(wrong.text===currentFreq.text) wrong=rand(freqs);
+translation=`${currentDose.text} ${currentRoute.text} ${wrong.text}.`;
+}
+
+}
+
+document.getElementById("translation").textContent=translation;
+document.getElementById("med").textContent=med;
+document.getElementById("qty").textContent=qty;
+document.getElementById("date").textContent=randomDate();
+document.getElementById("rxnum").textContent="Rx #"+Math.floor(100000+Math.random()*900000);
+document.getElementById("patient").textContent=randomPatientName();
+
+renderSig();
+
+}
+
+function setMode(newMode){
+
+if(mode===newMode) return;
+
+mode=newMode;
+
+document.getElementById("modeRegularBtn").classList.toggle("active", mode==="regular");
+document.getElementById("modeAdvancedBtn").classList.toggle("active", mode==="advanced");
+
+makePuzzle();
+
+}
+
+function answer(playerSaysCorrect){
+
+if(playerSaysCorrect===currentCorrect){
+flashScreen("correct");
+
+score++;
+scoreEl.textContent=score;
+
+if(score>best){
+best=score;
+localStorage.setItem("sigBest",best);
+bestEl.textContent=best;
+}
+
+document.getElementById("feedback").style.color="#1f6b3a";
+document.getElementById("feedback").textContent="Correct!";
+makePuzzle();
+
+}else{
+
+hearts--;
+updateHearts();
+
+document.getElementById("feedback").style.color="#a3242c";
+document.getElementById("feedback").textContent="Incorrect.";
+
+if(hearts<=0){
+gameOver();
+}else{
+makePuzzle();
+}
+
+}
+
+}
+
+function updateHearts(){
+
+document.getElementById("hearts").textContent=
+"❤️".repeat(hearts)+"🖤".repeat(3-hearts);
+
+}
+
+function gameOver(){
+
+document.getElementById("finalScore").textContent=best;
+document.getElementById("gameOver").style.display="flex";
+
+}
+
+function startGame(selectedMode){
+
+    mode = selectedMode;
+
+    document.getElementById("menuScreen").style.display="none";
+    document.getElementById("gameScreen").style.display="block";
+
+    document.getElementById("modeRegularBtn").classList.toggle("active", mode==="regular");
+    document.getElementById("modeAdvancedBtn").classList.toggle("active", mode==="advanced");
+
+    restart();
+
+}
+
+function restart(){
+
+score=0;
+hearts=3;
+scoreEl.textContent=0;
+updateHearts();
+document.getElementById("gameOver").style.display="none";
+makePuzzle();
+
+}
+
+function backToMenu(){
+
+    score = 0;
+    hearts = 3;
+
+    scoreEl.textContent = 0;
+    updateHearts();
+
+    document.getElementById("gameOver").style.display="none";
+
+    document.getElementById("gameScreen").style.display="none";
+    document.getElementById("menuScreen").style.display="block";
+
+}
+
+function flashScreen(type){
+
+const flash=document.getElementById("flash");
+
+flash.className="flash "+type+" show";
+
+setTimeout(()=>{
+flash.classList.remove("show");
+},300);
+
+}
+
+updateHearts();
+
+</script>
+
+</body>
+</html>
