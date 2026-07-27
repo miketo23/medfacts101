@@ -520,7 +520,7 @@ button:hover{ transform:none; }
 </div>
 
 <div class="offer">
-<strong id="offerLabel">Does this match the highlighted instruction?</strong>
+<strong id="offerLabel">Does this match the following instruction?</strong>
 <p id="translation"></p>
 </div>
 
@@ -639,14 +639,6 @@ const parts = mode==="advanced"
 
 let sigHTML="";
 
-parts.forEach((p,i)=>{
-if(i===currentHighlightIndex){
-sigHTML+=`<span class="highlight">${p}</span> `;
-}else{
-sigHTML+=p+" ";
-}
-});
-
 sigHTML=sigHTML.trim();
 
 if(mode==="regular"){
@@ -657,7 +649,7 @@ document.getElementById("sig").innerHTML=sigHTML;
 
 document.getElementById("offerLabel").textContent = mode==="advanced"
 ? "Offered Translation"
-: "Does this match the highlighted instruction?";
+: "Does this match the following instruction?";
 
 document.getElementById("modeHint").textContent = mode==="advanced"
 ? "SIG shown in medical shorthand"
