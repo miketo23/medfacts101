@@ -257,10 +257,12 @@ h1{
 }
 
 .highlight{
-    background:#f7e26b;
-    font-weight:700;
-    padding:1px 4px;
-    border-radius:2px;
+    background:#fff4a8;
+    border:2px solid #c17817;
+    border-radius:5px;
+    padding:4px 8px;
+    font-weight:bold;
+    box-shadow:0 0 10px rgba(193,120,23,.25);
 }
 
 .qty-box{
@@ -520,7 +522,7 @@ button:hover{ transform:none; }
 </div>
 
 <div class="offer">
-<strong id="offerLabel">Does this match the highlighted instruction?</strong>
+<strong id="offerLabel">Does this match the following instruction?</strong>
 <p id="translation"></p>
 </div>
 
@@ -569,17 +571,44 @@ function randomPatientName() {
     return `${rand(firstNames)} ${rand(lastNames)}`;
 }
 
-const meds=[
-"Amoxicillin 500 mg Capsules",
-"Lisinopril 10 mg Tablets",
-"Metformin 500 mg Tablets",
-"Atorvastatin 20 mg Tablets",
-"Ibuprofen 600 mg Tablets",
-"Levothyroxine 50 mcg Tablets",
-"Cephalexin 500 mg Capsules",
-"Prednisone 20 mg Tablets",
-"Azithromycin 250 mg Tablets",
-"Losartan 50 mg Tablets"
+const meds = [
+
+{
+    name:"Amoxicillin 500 mg Capsules",
+    routes:["PO"],
+    freqs:["BID","TID"]
+},
+
+{
+    name:"Lisinopril 10 mg Tablets",
+    routes:["PO"],
+    freqs:["QD"]
+},
+
+{
+    name:"Atorvastatin 20 mg Tablets",
+    routes:["PO"],
+    freqs:["QHS"]
+},
+
+{
+    name:"Nitroglycerin 0.4 mg Tablets",
+    routes:["SL"],
+    freqs:["PRN"]
+},
+
+{
+    name:"Timolol 0.5% Eye Drops",
+    routes:["OD","OS","OU"],
+    freqs:["BID"]
+},
+
+{
+    name:"Hydrocortisone Rectal Suppository",
+    routes:["PR"],
+    freqs:["BID"]
+}
+
 ];
 
 const quantities=[20,30,60,90,120];
@@ -620,8 +649,13 @@ let currentDose, currentRoute, currentFreq, currentHighlightIndex;
 const scoreEl=document.getElementById("score");
 const bestEl=document.getElementById("best");
 
-let best=Number(localStorage.getItem("sigBest")||0);
-bestEl.textContent=best;
+const bestKey =
+    mode === "advanced"
+        ? "sigBestAdvanced"
+        : "sigBestRegular";
+
+let best = Number(localStorage.getItem(bestKey) || 0);
+bestEl.textContent = best;
 
 function rand(a){
 return a[Math.floor(Math.random()*a.length)];
@@ -657,7 +691,7 @@ document.getElementById("sig").innerHTML=sigHTML;
 
 document.getElementById("offerLabel").textContent = mode==="advanced"
 ? "Offered Translation"
-: "Does this match the highlighted instruction?";
+: "Does this match the following instruction?";
 
 document.getElementById("modeHint").textContent = mode==="advanced"
 ? "SIG shown in medical shorthand"
@@ -669,7 +703,17 @@ function makePuzzle(){
 
 document.getElementById("feedback").textContent="";
 
-const med=rand(meds);
+const med = rand(meds);
+
+const allowedRoutes =
+    routes.filter(r =>
+        med.routes.includes(r.sig)
+    );
+
+const allowedFreqs =
+    freqs.filter(f =>
+        med.freqs.includes(f.sig)
+    );
 const qty=rand(quantities);
 
 currentDose=rand(doseOptions);
@@ -706,7 +750,7 @@ translation=`${currentDose.text} ${currentRoute.text} ${wrong.text}.`;
 }
 
 document.getElementById("translation").textContent=translation;
-document.getElementById("med").textContent=med;
+document.getElementById("med").textContent=med.name;
 document.getElementById("qty").textContent=qty;
 document.getElementById("date").textContent=randomDate();
 document.getElementById("rxnum").textContent="Rx #"+Math.floor(100000+Math.random()*900000);
@@ -739,7 +783,7 @@ scoreEl.textContent=score;
 
 if(score>best){
 best=score;
-localStorage.setItem("sigBest",best);
+localStorage.setItem(bestKey, best);
 bestEl.textContent=best;
 }
 
@@ -753,7 +797,20 @@ hearts--;
 updateHearts();
 
 document.getElementById("feedback").style.color="#a3242c";
-document.getElementById("feedback").textContent="Incorrect.";
+
+    let explanation = "";
+
+if(currentHighlightIndex===0)
+    explanation = "Check the dose.";
+
+if(currentHighlightIndex===1)
+    explanation = "Check the route of administration.";
+
+if(currentHighlightIndex===2)
+    explanation = "Check the frequency.";
+
+document.getElementById("feedback").textContent =
+"Incorrect. " + explanation;
 
 if(hearts<=0){
 gameOver();
@@ -782,6 +839,14 @@ document.getElementById("gameOver").style.display="flex";
 function startGame(selectedMode){
 
     mode = selectedMode;
+
+    const bestKey =
+    mode === "advanced"
+        ? "sigBestAdvanced"
+        : "sigBestRegular";
+
+best = Number(localStorage.getItem(bestKey) || 0);
+bestEl.textContent = best;
 
     document.getElementById("menuScreen").style.display="none";
     document.getElementById("gameScreen").style.display="block";
