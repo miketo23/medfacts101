@@ -303,6 +303,20 @@ Qty:
 
 <script>
 
+const playlist = [
+    "deepend.mp3",
+    "virtual-love.mp3",
+    "pure-intentions.mp3"
+];
+
+const bgMusic = new Audio(
+    playlist[Math.floor(Math.random() * playlist.length)]
+);
+
+bgMusic.loop = true;
+bgMusic.volume = 0.3;
+
+    
 const firstNames = [
   "James","Mary","John","Patricia","Robert","Jennifer",
   "Michael","Linda","William","Elizabeth","David","Susan",
