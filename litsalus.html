@@ -1055,15 +1055,6 @@ document.getElementById("gameOver").style.display="flex";
 
 }
 
-function startGame(selectedMode){
-
-    mode = selectedMode;
-
-    const bestKey =
-    mode === "advanced"
-        ? "sigBestAdvanced"
-        : "sigBestRegular
-
 function getBestKey(){
 
     return mode === "advanced"
@@ -1072,11 +1063,15 @@ function getBestKey(){
 
 }
 
-best = Number(localStorage.getItem(getBestKey()) || 0);
-bestEl.textContent = best;
+function startGame(selectedMode){
 
-    document.getElementById("menuScreen").style.display="none";
-    document.getElementById("gameScreen").style.display="block";
+    mode = selectedMode;
+
+    best = Number(localStorage.getItem(getBestKey()) || 0);
+    bestEl.textContent = best;
+
+    document.getElementById("menuScreen").style.display = "none";
+    document.getElementById("gameScreen").style.display = "block";
 
     restart();
     startMusic();
