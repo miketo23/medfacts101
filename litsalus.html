@@ -123,7 +123,30 @@ h1{
     border-radius:10px;
     font-size:1.15rem;
 }
+#musicBtn{
 
+    width:50px;
+    height:50px;
+
+    border:none;
+    border-radius:50%;
+
+    background:var(--amber);
+    color:white;
+
+    font-size:1.3rem;
+
+    cursor:pointer;
+
+    flex:none;
+
+}
+
+#musicBtn:hover{
+
+    transform:scale(1.08);
+
+}
 .buttons{
     display:flex;
     gap:15px;
@@ -320,6 +343,22 @@ const bgMusic = new Audio(
 
 bgMusic.loop = true;
 bgMusic.volume = 0.3;
+
+function toggleMusic(){
+
+    if(bgMusic.paused){
+
+        bgMusic.play();
+        document.getElementById("musicBtn").textContent="🔊";
+
+    }else{
+
+        bgMusic.pause();
+        document.getElementById("musicBtn").textContent="🔇";
+
+    }
+
+}
 
     
 const firstNames = [
