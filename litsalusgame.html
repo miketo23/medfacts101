@@ -441,9 +441,67 @@ button:focus-visible{
 *{ transition:none !important; }
 button:hover{ transform:none; }
 }
+#loadingScreen{
+    position:fixed;
+    inset:0;
+    background:#140f0c;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:10000;
+}
+
+.loading-logo{
+    width:130px;
+    margin-bottom:20px;
+}
+
+#loadingScreen h1{
+    color:white;
+    margin:10px 0;
+}
+
+#loadingScreen p{
+    color:#e8b563;
+    font-family:'Space Mono',monospace;
+    margin-bottom:30px;
+}
+
+.loader{
+    width:65px;
+    height:65px;
+    border:7px solid rgba(255,255,255,.2);
+    border-top:7px solid #c17817;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+
+from{
+    transform:rotate(0deg);
+}
+
+to{
+    transform:rotate(360deg);
+}
+
+}
 </style>
 </head>
 <body>
+    <div id="loadingScreen">
+
+    <img src="faviconn.jpg" class="loading-logo">
+
+    <h1>Litsalus</h1>
+
+    <p>Loading prescription database...</p>
+
+    <div class="loader"></div>
+
+</div>
 <div id="menuScreen">
 
     <h1>Litsalus</h1>
@@ -898,6 +956,15 @@ flash.classList.remove("show");
 
 updateHearts();
 
+    window.onload = function(){
+
+    setTimeout(function(){
+
+        document.getElementById("loadingScreen").style.display="none";
+
+    },2000);
+
+}
 </script>
 
 </body>
