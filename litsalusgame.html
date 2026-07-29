@@ -47,9 +47,85 @@ header{
     gap:18px;
 }
 
-h1{
+#menuScreen{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:25px;
+}
+
+.menu-card{
+
+    width:min(650px,95vw);
+
+    background:var(--paper);
+
+    border:4px solid var(--amber-deep);
+
+    border-radius:20px;
+
+    padding:50px 35px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+}
+    .menu-logo{
+
+    width:140px;
+
+    max-width:35vw;
+
+    margin-bottom:20px;
+
+}
+    @media(max-width:600px){
+
+#menuScreen h1{
+
+    font-size:2.6rem;
+
+}
+
+}
+    #menuScreen .tagline{
+
+    color:#5b4833;
+
+    font-size:1rem;
+
+    max-width:450px;
+
+    margin:0 auto 35px;
+
+}
+    .menu-buttons{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+    .menu-buttons button{
+
+    width:100%;
+
+    max-width:350px;
+
+    margin:auto;
+
+    font-size:1.2rem;
+
+    padding:18px;
+
+}
+    h1{
     margin:0;
-    font-size:2.4rem;
+    font-size:4rem;
     font-weight:700;
     color:#fbf3e3;
     letter-spacing:.5px;
@@ -504,20 +580,28 @@ to{
 </div>
 <div id="menuScreen">
 
-    <h1>Litsalus</h1>
+    <div class="menu-card">
 
-    <p class="tagline">
-        Test your ability to interpret prescription SIG codes.
-    </p>
+        <img src="faviconn.jpg" class="menu-logo">
 
-    <div style="margin-top:40px;">
-        <button class="restart" onclick="startGame('regular')">
-            Regular Mode
-        </button>
+        <h1>Litsalus</h1>
 
-        <button class="restart" onclick="startGame('advanced')">
-            Advanced Mode
-        </button>
+        <p class="tagline">
+            Test your ability to interpret prescription SIG codes.
+        </p>
+
+        <div class="menu-buttons">
+
+            <button class="restart" onclick="startGame('regular')">
+                Regular Mode
+            </button>
+
+            <button class="restart" onclick="startGame('advanced')">
+                Advanced Mode
+            </button>
+
+        </div>
+
     </div>
 
 </div>
