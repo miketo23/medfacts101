@@ -241,6 +241,11 @@ grid-template-columns:1fr;
 <div>Best: <span id="best">0</span></div>
 <div class="hearts" id="hearts"></div>
 </div>
+
+<button id="musicBtn" onclick="toggleMusic()">
+    🔊
+</button>
+
 </header>
 
 <div class="label">
@@ -549,6 +554,7 @@ function flashScreen(type){
 
 updateHearts();
 makePuzzle();
+bgMusic.play();
 
 </script>
 
