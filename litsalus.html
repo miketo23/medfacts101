@@ -123,6 +123,31 @@ header{
 
     padding:18px;
 
+#musicBtn{
+
+    width:55px;
+    height:55px;
+
+    flex:none;
+
+    border:none;
+    border-radius:50%;
+
+    background:#c17817;
+    color:white;
+
+    font-size:1.4rem;
+
+    cursor:pointer;
+
+}
+
+#musicBtn:hover{
+
+    transform:scale(1.08);
+
+}
+        
 }
     h1{
     margin:0;
@@ -334,12 +359,19 @@ header{
 }
 
 .highlight{
-    background:#fff4a8;
-    border:2px solid #c17817;
-    border-radius:5px;
-    padding:4px 8px;
-    font-weight:bold;
-    box-shadow:0 0 10px rgba(193,120,23,.25);
+
+    background:#ffd54d;
+
+    color:#000;
+
+    border:3px solid #8a530c;
+
+    font-weight:700;
+
+    padding:5px 8px;
+
+    border-radius:6px;
+
 }
 
 .qty-box{
@@ -579,7 +611,7 @@ to{
     <div class="loader"></div>
 
 </div>
-<div id="menuScreen">
+<div id="menuScreen" style="display:none;">
 
     <div class="menu-card">
 
@@ -626,6 +658,12 @@ to{
 <div class="stat"><span class="stat-label">Best</span><span class="stat-value" id="best">0</span></div>
 <div class="stat hearts" id="hearts"></div>
 </div>
+
+<button id="musicBtn" onclick="toggleMusic()">
+🔇
+</button>
+
+
 </header>
 
 <div class="slip-stack">
@@ -693,7 +731,48 @@ to{
 <div id="flash" class="flash"></div>
 
 <script>
+const playlist = [
+    "deepend.mp3",
+    "virtual-love.mp3",
+    "pure-intentions.mp3"
+];
 
+const bgMusic = new Audio(
+    playlist[Math.floor(Math.random() * playlist.length)]
+);
+
+bgMusic.loop = true;
+bgMusic.volume = 0.25;
+
+let musicStarted = false;
+
+function startMusic(){
+
+    if(!musicStarted){
+
+        bgMusic.play().catch(err => console.log(err));
+
+        musicStarted = true;
+
+    }
+
+}
+
+function toggleMusic(){
+
+    if(bgMusic.paused){
+
+        bgMusic.play();
+        document.getElementById("musicBtn").textContent = "🔊";
+
+    }else{
+
+        bgMusic.pause();
+        document.getElementById("musicBtn").textContent = "🔇";
+
+    }
+
+}
 const firstNames = [
   "James","Mary","John","Patricia","Robert","Jennifer",
   "Michael","Linda","William","Elizabeth","David","Susan",
@@ -860,8 +939,8 @@ const allowedFreqs =
 const qty=rand(quantities);
 
 currentDose=rand(doseOptions);
-currentRoute=rand(routes);
-currentFreq=rand(freqs);
+currentRoute=rand(allowedRoutes);
+currentFreq=rand(allowedFreqs);
 currentHighlightIndex=Math.floor(Math.random()*3);
 
 let translation=`${currentDose.text} ${currentRoute.text} ${currentFreq.text}.`;
@@ -923,7 +1002,7 @@ scoreEl.textContent=score;
 
 if(score>best){
 best=score;
-localStorage.setItem(bestKey, best);
+localStorage.setItem(getBestKey(), best);
 bestEl.textContent=best;
 }
 
@@ -983,18 +1062,24 @@ function startGame(selectedMode){
     const bestKey =
     mode === "advanced"
         ? "sigBestAdvanced"
+        : "sigBestRegular
+
+function getBestKey(){
+
+    return mode === "advanced"
+        ? "sigBestAdvanced"
         : "sigBestRegular";
 
-best = Number(localStorage.getItem(bestKey) || 0);
+}
+
+best = Number(localStorage.getItem(getBestKey()) || 0);
 bestEl.textContent = best;
 
     document.getElementById("menuScreen").style.display="none";
     document.getElementById("gameScreen").style.display="block";
 
-    document.getElementById("modeRegularBtn").classList.toggle("active", mode==="regular");
-    document.getElementById("modeAdvancedBtn").classList.toggle("active", mode==="advanced");
-
     restart();
+    startMusic();
 
 }
 
@@ -1042,7 +1127,8 @@ updateHearts();
 
     setTimeout(function(){
 
-        document.getElementById("loadingScreen").style.display="none";
+document.getElementById("loadingScreen").style.display="none";
+document.getElementById("menuScreen").style.display="flex";
 
     },2000);
 
