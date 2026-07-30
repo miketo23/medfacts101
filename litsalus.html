@@ -945,6 +945,8 @@ currentCorrect=Math.random()<0.5;
 if(!currentCorrect){
 
 const error=Math.floor(Math.random()*3);
+// Highlight the thing that is wrong
+    currentHighlightIndex = error;
 
 if(error===0){
 let wrong=rand(doseOptions);
