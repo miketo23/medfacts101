@@ -123,7 +123,27 @@ header{
 
     padding:18px;
     }
+    
+#usernameInput{
 
+    width:100%;
+    max-width:350px;
+
+    padding:14px;
+
+    margin:20px auto;
+
+    display:block;
+
+    font-size:1rem;
+
+    border:2px solid var(--amber-deep);
+
+    border-radius:8px;
+
+    font-family:'Space Mono',monospace;
+
+}
 #musicBtn{
 
     width:55px;
@@ -621,6 +641,14 @@ to{
         <p class="tagline">
             Test your ability to interpret prescription SIG codes.
         </p>
+        
+        <label for="usernameInput">Username</label>
+
+<input
+    id="usernameInput"
+    type="text"
+    maxlength="20"
+    placeholder="Enter a username">
 
         <div class="menu-buttons">
 
@@ -729,7 +757,64 @@ to{
 </div>
 <div id="flash" class="flash"></div>
 
-<script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    orderBy,
+    limit
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCaK9MRmCNBA2N8Flte8e8daz3IKYlhaHY",
+  authDomain: "litsalus.firebaseapp.com",
+  databaseURL: "https://litsalus-default-rtdb.firebaseio.com",
+  projectId: "litsalus",
+  storageBucket: "litsalus.firebasestorage.app",
+  messagingSenderId: "558783714755",
+  appId: "1:558783714755:web:f71640635c231c54fe1976",
+  measurementId: "G-VM8G1090ND"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+    console.log("Firebase connected!");
+
+async function saveScore(name, score){
+
+    try{
+
+        await addDoc(collection(db, "scores"),{
+
+            username: name,
+            score: score,
+            mode: mode,
+            timestamp: new Date()
+
+        });
+
+        console.log("Score uploaded!");
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+let username = "";
+    
 const playlist = [
     "deepend.mp3",
     "virtual-love.mp3",
@@ -1045,10 +1130,12 @@ document.getElementById("hearts").textContent=
 
 }
 
-function gameOver(){
+async function gameOver(){
 
-document.getElementById("finalScore").textContent=best;
-document.getElementById("gameOver").style.display="flex";
+    await saveScore(username, score);
+
+    document.getElementById("finalScore").textContent = best;
+    document.getElementById("gameOver").style.display = "flex";
 
 }
 
@@ -1061,6 +1148,21 @@ function getBestKey(){
 }
 
 function startGame(selectedMode){
+
+    username =
+        document.getElementById("usernameInput")
+        .value
+        .trim();
+
+    if(username === ""){
+
+        alert("Please enter a username.");
+
+        return;
+
+    }
+
+    localStorage.setItem("username", username);
 
     mode = selectedMode;
 
@@ -1115,6 +1217,9 @@ flash.classList.remove("show");
 
 updateHearts();
 
+document.getElementById("usernameInput").value =
+    localStorage.getItem("username") || "";
+    
     window.onload = function(){
 
     setTimeout(function(){
