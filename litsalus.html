@@ -143,6 +143,31 @@ header{
     font-family:'Space Mono',monospace;
 
 }
+
+#leaderboardList{
+
+    margin:25px 0;
+
+    text-align:left;
+
+    font-family:'Space Mono',monospace;
+
+}
+
+#leaderboardList p{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:10px 0;
+
+    margin:0;
+
+    border-bottom:1px dashed rgba(0,0,0,.15);
+
+}
+
 #musicBtn{
 
     width:55px;
@@ -659,6 +684,10 @@ to{
                 Advanced Mode
             </button>
 
+            <button class="restart" onclick="showLeaderboard()">
+🏆 Global Leaderboard
+</button>
+
         </div>
 
     </div>
@@ -754,6 +783,23 @@ to{
 <button class="restart" onclick="restart()">Play Again</button>
 </div>
 </div>
+
+<div class="overlay" id="leaderboardScreen">
+
+    <div class="panel">
+
+        <h2>🏆 Global Leaderboard</h2>
+
+        <div id="leaderboardList"></div>
+
+        <button class="restart" onclick="closeLeaderboard()">
+            Close
+        </button>
+
+    </div>
+
+</div>
+
 <div id="flash" class="flash"></div>
 
 <script type="module">
@@ -1137,7 +1183,47 @@ async function gameOver(){
     document.getElementById("gameOver").style.display = "flex";
 
 }
+async function showLeaderboard(){
 
+    const q = query(
+        collection(db, "scores"),
+        orderBy("score","desc"),
+        limit(10)
+    );
+
+    const snapshot = await getDocs(q);
+
+    let html = "";
+
+    let place = 1;
+
+    snapshot.forEach(doc=>{
+
+        const data = doc.data();
+
+        html += `
+        <p>
+            ${place}. ${data.username}
+            <strong>${data.score}</strong>
+        </p>
+        `;
+
+        place++;
+
+    });
+
+    document.getElementById("leaderboardList").innerHTML = html;
+
+    document.getElementById("leaderboardScreen").style.display="flex";
+
+}
+
+function closeLeaderboard(){
+
+    document.getElementById("leaderboardScreen").style.display="none";
+
+}
+    
 function getBestKey(){
 
     return mode === "advanced"
@@ -1235,6 +1321,8 @@ window.answer = answer;
 window.restart = restart;
 window.backToMenu = backToMenu;
 window.toggleMusic = toggleMusic;
+window.showLeaderboard = showLeaderboard;
+window.closeLeaderboard = closeLeaderboard;
 
 </script>
 
